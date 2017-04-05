@@ -1,0 +1,530 @@
+= Quick start guide for BusIT week 2016
+Jaromír Landa, Jan Kolomazník, Pavel Turčínek
+v1.0, 7.1.2017
+:toc: left
+:icons: font
+
+Framework is designed to store and retrieve information about the course of the game. 
+In other words it is an object wrapper over the SQLite databases in Android.
+Framework allows to save one or several story lines consisting of subtasks. 
+In the game there is always just one active task.
+To get the task, it is needed to fulfill the entry condition according to task type, for example, to get to a specific position. 
+And Subsequently solve a given puzzle for a certain period of time. 
+Framework doesn't take care of testing of the starting conditions or about solving puzzles. 
+This is the task for students for the BusIT week.
+
+This material can be download as link:quick-start.pdf[pdf] or link:quick-start.pdf[pdf]
+
+== Get application template
+
+*Application tamplate with engine module can be download link:bus-it-week.zip[here].*
+
+== Database initialization
+To initialize the database it is necessary to create a custom descendant of the `cz.mendelu.busItWeek.framework.StoryLineDatabaseHelper`. 
+This class is inspired by classic https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html[SQLiteOpenHelper].
+However, it is focused purely on the creation of a single game storyLine. 
+This class requires a constructor overload with a database version number as the parameter. 
+The database number must be increased each time the onCreate method changes.
+It causes the discard of old data and retrieves new ones.
+
+
+.StoryLineDatabaseHelper contructor
+[source,java]
+....
+public class MyStoryLineDatabaseHelper extends StoryLineDatabaseHelper {
+
+    private static final int VERSION = 1;
+
+    public MyStoryLineDatabaseHelper() {
+        super(VERSION);
+    }
+
+    ...
+....
+
+The second method is `onCreate(StoryLineBuilder builder)`. 
+This method is called when you start initializing the database and also every time you increase the version.
+Before the calling all of the old data is automatically deleted.
+
+
+.StoryLineDatabaseHelper onCreate
+[source,java]
+....
+
+public void onCreate(StoryLineBuilder builder) {
+    builder.addGPSTask("name of task")
+        .victoryPoints(10)
+        .position(lat, lon) // doubles
+        .triggerRadius(15) // meters
+        .puzzleSimple()
+            .question("1+2=")
+            .answer("3")
+            .puzzleDone()
+        .taskDone()
+    builder.addBeaconTask("name of task")
+        .beaconCode(major, minor)
+        .puzzleChoice()
+             .question("Question text")
+             .choice("text 1", false)
+             .choice("text 2", true)
+             .choice("text 3", false)
+             .choice("text 4", false)
+             .puzzleDone()
+        .taskDone()
+}
+....
+
+== Work with an instance of the StoryLine
+To work with instances of the class `cz.mendelu.busItWeek.framework.StoryLine` you must use its static method `open`. 
+To create it you need to have available the `context` and a your own implementation of the abstract class `StoryLineDatabaseHelper`. 
+Instance is typically created in the method https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)[onCreate Activity].
+It returns an instance of the StoryLine, which should be saved as a variable of the activity instance.
+
+
+.StoryLine open
+[source,java]
+....
+public class MyActivity extends Activity {
+
+    private StoryLine storyLine;
+
+    public void onCreate(Bundle savedInstanceState) {
+        storyLine = StoryLine.open(this, MyStoryLineDatabaseHelper.class);
+    }
+
+    ...
+
+....
+
+When you work with an instance of the `storyLine`, it is possible to browse and interact with the story line. 
+
+The basic operations are the following: 
+1. To obtain the current task, the method `Task currentTask()`. 
+2. Get a list of all the tasks, the method `List<Task> taskList()`. 
+3. Reset story line to its default state, the method `void reset()`.
+
+
+=== Get the current task
+The basic operations of `StoryLine` that is most often performed is getting the current task by method `currentTask()`.
+Each time it is called the current state of the database is checked and it always retrieves the current task.
+Therefore, it is good to execute it in the method `onResume()`, even when the user returns from other activity.
+
+
+.StoryLine currentTask
+[source,java]
+....
+public class MyActivity extends Activity {
+
+    private StoryLine storyLine;
+    private Task currentTask;
+
+    public void onResume() {
+        currentTask = storyLine.currentTask();
+        ...
+    }
+
+....
+
+== The basic work with tasks 
+All of the tasks have a common ancestor, an abstract object `Task`.
+Each type is represented by one descendant of the class `Task`. 
+Every descendant contains the information required for implementation of the app logic.
+
+
+=== Common properties of tasks 
+All tasks have some properties in common. These properties are represented by a gettery object `Task`.
+
+
+.Table Common properties of tasks
+|===
+|Name |Method for reading |Date type |Description
+
+|*name*
+|`getName()`
+|`String`
+|Name of task
+
+|*victoryPoints*
+|`getVictoryPoints()`
+|`int`
+|Specifies the number of points obtained by the player for the successful performance of the task.
+
+|*status*
+|`getStatus()`
+|`TaskStatus`
+|Status of the task, that is, if it was already solved (successful/unsuccessful), if it is being solved, or if it only waits for its solution.
+
+|*puzzleTime*
+|`getGuzzleTime()`
+|`long`
+|Defines the time to solve the puzzle.
+
+|*puzzle*
+|`getGuzzle()`
+|`Puzzle`
+|An instance of one of the puzzles.
+
+|*hint*
+|`getHint()`
+|`String`
+|Short help for players, what you need to do to make the task active.
+
+|*latitude*
+|`getLatitude()`
+|`double`
+|
+
+|*longitude*
+|`getLongitude()`
+|`double`
+|
+|===
+
+=== Common methods for tasks 
+Tasks have the methods which are designed to work with instances of Task. 
+These methods change the status of a task, and some of them may be called only once. 
+Their repeated calls do not cause the error, but it does not lead to a change of status again.
+When the status is changed new status is automatically saved into the database.
+
+
+.Table Common methods for tasks
+|===
+|Name of method |Atributes |Return type|Description
+
+|finish
+|boolen
+|void
+|It sets the task as completed. Parameter `true` says that it is completed successfully, `false` unsuccessfully.
+|===
+
+== Type of tasks
+There are four type of tasks:
+
+1. *GPS position*: the user is located close to the predetermined point (outdoor only)
+2. *Lighthouse*: the user is located close to the transmitter
+3. *NFC tag*: the user retrieves the static tag (NFC reader – does not have to be included on all type of devices)
+4. *QR/EAN Code*: user scan using the camera specific code
+
+
+Method of class `StoryLine.currentTask()` returns a generic instance of class `Task`.
+When you work with the task more specifically you need to determine the type of tasks.
+For this purpose, it is appropriate to use the keyword `instanceof` and compare it to a specific class of the task. 
+The following example shows how to verify that the task is of type `GPSTask`.
+
+
+.StoryLine currentTask type cheack
+[source,java]
+....
+currentTask = storyLine.currentTask();
+if (currentTask instanceof GPSTask) {
+    GPSTask gpsTask = (GPSTask) currentTask; // Pretypovani
+    ...
+}
+....
+
+
+=== The task of the *GPS positions*
+This task stores the geographical position in lat/lon and distance from this point.
+It is implemented in the class `GPSTask`.
+ If a user gets closer to this point than the is the distance, he/she should activate the task and he/she should have access to solve the puzzle.
+
+
+.Table Properties of GPSTask tasks
+|===
+|Name |Method for reading |Date type |Description
+
+|*radius*
+|`getRadius()`
+|`double`
+|The distance from the lat/lon to which the user should get to activate the task.
+|===
+
+=== The task of the *Lighthouse*
+This task is to be activated when the player gets close to a beacon.
+It is implemented in the class `BeaconTask`. 
+Beacons are identified using a pair of code (major and minor).
+
+.Table Properties of BeaconTask tasks
+|===
+|Name |Method for reading |Date type |Description
+
+|*major*
+|`getMajor()`
+|`int`
+|
+
+|*minor*
+|`getMinor()`
+|`int`
+|
+|===
+
+=== Task type *CodeTask*
+This type of task is activated when the user scans the QR/EAN Code with a camera of his/her device.
+It is implemented by the class `CodeTask`.
+The properties of this task are object type (Integer/String), so they can have the value of `null`.
+It is therefore possible that a task can be activated both ways. 
+However CodeTask always contains at least one null attribute.
+
+.Table Properties of CodeTask tasks
+|===
+|Name |Method for reading |Date type |Description
+
+|*qr*
+|`getQR()`
+|`String`
+|
+
+|*ean*
+|`getEAN()`
+|`Integer`
+|
+|===
+
+=== The task of the *NFC tag*
+This task is activated when the user scans the NFC code.
+It is implemented by the class `NFCTask`.
+This task has the special property `alternativeTask`, which returns different Task. 
+The reason for this is the fact that not every cell phone has the NFC reader. 
+You can use this property to get a different type of task than NFC, such as QR code Task.
+
+
+.Table Properties of NFCTask tasks
+|===
+|Name |Method for reading |Date type |Description
+
+|*fnc*
+|`getFNC()`
+|`int`
+|
+
+|*alternativeTask*
+|`getAlternativeTask()`
+|`Task`
+|
+|===
+
+== Puzzles
+Each task has assigned one puzzle which can be one of several types. This puzzle has to be accomplished by player at a time when the task is activated.
+There are following types of puzzles:
+
+1. *Solve the puzzle* (e.g. mathematical equation, quiz question ...) and enter the result as text. 
+2. *Solve the puzzle* and enter the result by selecting from the options. 
+3. *Show pictures to the users* (the response) and let him choose one (e.g. you are staying in an area of Brno, the task is to choose a municipal emblem of the part of the city you are looking at, you can see for example _Královo pole_) 
+4. *Find something in surrounding area of the point* where the task was launched.  It can be QR code or NFC tag. User has to scan it.
+
+All puzzles are the descendant of the class `Puzzle`
+
+.Table Common properties of puzzles
+|===
+|Name |Method for reading |Date type |Description
+
+|*puzzleTime*
+|`getPuzzleTime()`
+|`long`
+|Defines the time to solve the puzzle.
+
+|*hint*
+|`getHint()`
+|`String`
+|Short hint for players to help the solution. 
+|===
+
+
+To specify a particular type of puzzle you must again use the operator `instaceof`, as well as for the type task `Task`.
+
+.Task puzzle type cheack
+[source,java]
+....
+currentTask = storyLine.currentTask();
+Puzzle puzzle = currentTask.getPuzzle();
+if (puzzle instanceof SimplePuzzle) {
+    SimplePuzzle simplePuzzle = (SimplePuzzle) puzzle; // Pretypovani
+    ...
+}
+....
+
+Each puzzle also has method `isCorrect(String answer)` which returns `true`/`false` indicating whether the question is answered correctly.
+
+=== Puzzle of *SimplePuzzle*
+.Table of properties for the SimplePuzzle
+|===
+|Name |Method for reading |Date type |Description
+
+|*question*
+|`getQuestion()`
+|`String`
+|The question that the player has to answer.
+
+|*answer*
+|`getAnswer()`
+|`String`
+|Answer to the question.
+|===
+
+=== Puzzle of *ChoicePuzzle*
+.Table of properties for the ChoicePuzzle
+|===
+|Name |Method for reading |Date type |Description
+
+|*question*
+|`getQuestion()`
+|`String`
+|The question that the player has to answer.
+
+|*choices*
+|`getChoices()`
+|`Map<String, Boolean>`
+|A list of options that the user selects from.
+ For each option is given, whether or not it is correct.
+|===
+
+=== Puzzle of *ImagePuzzle*
+.TTable of properties for the ImagePuzzle
+|===
+|Name |Method for reading |Date type |Description
+
+|*question*
+|`getQuestion()`
+|`String`
+|The question that the player has to answer.
+
+|*images*
+|`getImages()`
+|`Map<Integer, Boolean>`
+|A list of the pictures, between which the user selects from.
+ Images are defined using the `id` resource.
+ For each option is given, whether or not it is correct.
+|===
+
+=== Puzzle of *AssignmentPuzzle*
+.Table of properties for the AssignmentPuzzle
+|===
+|Name |Method for reading |Date type |Description
+
+|*assignment*
+|`getAssignment()`
+|`String`
+|A description of where the player should find the tag, or what he/she should do to find it.
+
+|*qrCode*
+|`getQRCode()`
+|`String`
+|The code that should be scanned, if it has value of `null`, then this option does not exist.
+
+|*ean*
+|`getEAN()`
+|`Integer`
+|The code that should be scanned, if it has value of `null`, then this option does not exist.
+
+|*beaconMajorCode*
+|`getBeaconMajorCode()`
+|`Integer`
+|The code that should be detected, if it has value of `null`, then this option does not exist.
+
+|*beaconMinorCode*
+|`getBeaconMinorCode()`
+|`Integer`
+|The code that should be detected, if it has value of `null`, then this option does not exist.
+|===
+
+== Class diagram
+
+.The basic class diagram
+[plantuml, assets/class-diagram, png]
+....
+class StoryLineDatabaseHelper <<abstract>> {
+  +StoryLineDatabaseHelper(int version)
+  #{abstract} onCreate(StoryLineBuilder builder)
+}
+
+class StoryLine {
+  +{static} StoryLine open(Context context, String name, Class helperClass)
+  + Task currentTask()
+  + List<Task> taskList
+  + void reset()
+}
+
+class Task <<abstract>> {
+  +String name
+  +int victoryPoints
+  +TaskStatus taskStatus
+  +Puzzle puzzle
+  +String hint
+  +void finish(boolean success)
+}
+
+enum TaskStatus {
+  WAITING
+  CURRENT
+  SUCCESS
+  FAILURE
+}
+
+class GPSTask {
+  +double latitude
+  +double longitude
+  +double radius
+}
+
+class BeaconTask {
+  +int major
+  +int minor
+}
+
+class NFCTask {
+  +int nfc
+  +Task alternativeTask
+}
+
+class CodeTask {
+  +Integer ean
+  +String qr
+}
+
+class Puzzle <<abstract>> {
+  +String hint
+  +long puzzleTime
+  +boolean {abstract} isCorrect(String answer)
+}
+
+class SimplePuzzle {
+  +String question
+  +String answer
+}
+
+class ChoicePuzzle {
+  +String question
+  +Map<String, Boolean> choices
+}
+
+class ImageSelectPuzzle {
+  +String question
+  +Map<String, Boolean> images
+}
+
+class AssignmentPuzzle {
+  +String assignment
+  +String qrCode
+  +Integer ean
+  +Integer beaconMajorCode
+  +Integer beaconMinorCode
+}
+
+Task <|-- GPSTask
+Task <|-- BeaconTask
+Task <|-- NFCTask
+Task <|-- CodeTask
+Puzzle <|-- SimplePuzzle
+Puzzle <|-- ChoicePuzzle
+Puzzle <|-- ImageSelectPuzzle
+Puzzle <|-- AssignmentPuzzle
+
+TaskStatus "1" -o "1" Task : taskStatus
+StoryLine o-- "0..n" Task : taskList
+
+Task *- "1" Puzzle : puzzle
+NFCTask *-- "1" Task : alternativeTask
+
+StoryLineDatabaseHelper <- StoryLine : používá při vytvoření
+....

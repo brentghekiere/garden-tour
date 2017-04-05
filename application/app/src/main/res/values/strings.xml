@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BusIT Week</string>
+    <string name="first_number">First Number</string>
+    <string name="second_number">Second Number</string>
+    <string name="title_activity_map">Map</string>
+    <string name="no_tasks"></string>
+</resources>
