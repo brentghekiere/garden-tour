@@ -11,4 +11,7 @@
 
     <!-- MapActivity strings -->
     <string name="points" formatted="false">Activity Points: %d</string>
+
+    <!-- Puzzle strings -->
+<string name="wrongAnswer">Answer incorrected, try again</string>
 </resources>
