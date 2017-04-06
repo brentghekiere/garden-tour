@@ -296,6 +296,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        initializeListeners();
     }
 
     @Override
@@ -316,6 +317,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             LatLng taskPosition = new LatLng(currentTask.getLatitude(), currentTask.getLongitude());
             if (SphericalUtil.computeDistanceBetween(user, taskPosition) < radius) {
                 // I should do smth
+                runPuzzleActivity(currentTask.getPuzzle());
             }
         }
     }
