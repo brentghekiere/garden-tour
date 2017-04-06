@@ -37,6 +37,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cz.mendelu.busItWeek.library.BeaconTask;
+import cz.mendelu.busItWeek.library.ChoicePuzzle;
 import cz.mendelu.busItWeek.library.CodeTask;
 import cz.mendelu.busItWeek.library.GPSTask;
 import cz.mendelu.busItWeek.library.ImageSelectPuzzle;
@@ -111,7 +112,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setSupportActionBar(toolbar);
         setUserInfo(0, 40);
 
-        storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
+        storyLine = StoryLine.open(this, GardernTourStoryLineDBHelper.class);
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
@@ -328,6 +329,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             startActivityForResult(intent, SIMPLE_PUZZLE_REQUEST_CODE);
         }
 
+        if (puzzle instanceof ChoicePuzzle) {
+            Intent intent = new Intent(this, ChoicePuzzleActivity.class);
+            startActivityForResult(intent, SIMPLE_PUZZLE_REQUEST_CODE);
+        }
+
         if (puzzle instanceof ImageSelectPuzzle) {
             Intent intent = new Intent(this, ImageSelectPuzzleActivity.class);
             startActivityForResult(intent, IMAGE_PUZZLE_REQUEST_CODE);
@@ -353,7 +359,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         alertDialogBuilder
                 .setTitle("Skip task")
-                .setMessage("Do you want to skip current task?")
+                .setMessage("Do you want to skip the current task?")
                 .setCancelable(true)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override

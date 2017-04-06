@@ -3,8 +3,7 @@
     <string name="first_number">First Number</string>
     <string name="second_number">Second Number</string>
     <string name="prompt_answer">Type answer</string>
-    <string name="wrong_answer">Wrong answer</string>
-
+    <string name="wrong_answer">Wrong answer. One attempt more.</string>
 
 
     <!--MainActivity string-->
@@ -16,6 +15,7 @@
 
     <!-- Puzzle strings -->
     <string name="wrongAnswer">Answer incorrected, try again</string>
+    <string name="choose_one_option_hint">Choose one option</string>
     <!--SimplePuzzleActivity-->
     <string name="answer_btn">Answer</string>
 

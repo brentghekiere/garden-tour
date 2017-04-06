@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#8bc34a</color>
     <color name="colorPrimaryDark">#60c127</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ffffff</color>
 
     <color name="colorGPS">#24963e</color>
     <color name="colorBeacon">#0074aa</color>
@@ -10,5 +10,6 @@
 
     <color name="splash_name_color">#525151</color>
     <color name="start_btn_color">#8b3a7b</color>
+    <color name="colorPurple">#8b3a7b</color>
 
 </resources>

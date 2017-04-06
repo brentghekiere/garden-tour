@@ -13,10 +13,11 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SimplePuzzleActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ImageSelectPuzzleActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -40,7 +41,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MemoryCardsActivity"></activity>
+        <activity android:name=".MemoryCardsActivity" />
+        <activity android:name=".ChoicePuzzleActivity"></activity>
     </application>
 
 </manifest>

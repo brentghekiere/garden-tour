@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/simple_puzzle_background"
-    tools:context="cz.mendelu.busItWeek.SimplePuzzleActivity">
+    android:background="@drawable/simple_puzzle_background3"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="cz.mendelu.busItWeek.ChoicePuzzleActivity">
 
 
     <LinearLayout
@@ -53,21 +54,16 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@android:color/white" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_answer"
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/android_material_design_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/input_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_answer"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textColor="@android:color/white" />
-        </android.support.design.widget.TextInputLayout>
-
+            android:layout_height="wrap_content"
+            android:hint="@string/choose_one_option_hint"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@android:color/white"
+            app:met_floatingLabel="normal" />
 
     </LinearLayout>
 
@@ -83,6 +79,7 @@
         android:onClick="checkAnswer"
         android:text="@string/answer_btn"
         android:textSize="@dimen/text_btn_size"
+        android:foreground="?android:attr/selectableItemBackground"
         android:textColor="@android:color/white"
         android:theme="@style/AppTheme.Button" />
 

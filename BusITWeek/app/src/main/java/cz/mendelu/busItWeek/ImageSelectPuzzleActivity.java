@@ -1,39 +1,44 @@
 package cz.mendelu.busItWeek;
 
 import android.content.Context;
-import android.support.annotation.BoolRes;
+import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import cz.mendelu.busItWeek.library.SimplePuzzle;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import cz.mendelu.busItWeek.library.ImageSelectPuzzle;
 import cz.mendelu.busItWeek.library.StoryLine;
 import cz.mendelu.busItWeek.library.Task;
 import cz.mendelu.busItWeek.library.timer.TimerUtil;
 
 public class ImageSelectPuzzleActivity extends AppCompatActivity {
-    private TextView counter;
-    private TextView question;
-    private ListView listView;
+
+    @BindView(R.id.timer)
+    TextView timer;
+    @BindView(R.id.question_tv)
+    TextView questionView;
+    @BindView(R.id.grid_view)
+    GridView gridView;
 
     private StoryLine storyLine;
-    private SimplePuzzle puzzle;
+    private ImageSelectPuzzle puzzle;
     private Task currentTask;
+    List<Integer> listOfItems;
 
     private ImageSelectListAdapter adapter;
 
@@ -42,27 +47,24 @@ public class ImageSelectPuzzleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_select_puzzle);
 
-        storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
-
+        ButterKnife.bind(this);
+        storyLine = StoryLine.open(this, GardernTourStoryLineDBHelper.class);
         currentTask = storyLine.currentTask();
 
-        counter = (TextView) findViewById(R.id.counter);
-        question = (TextView) findViewById(R.id.question);
-        listView = (ListView) findViewById(R.id.lijstje);
-        puzzle = (SimplePuzzle) currentTask.getPuzzle();
+        if (currentTask != null && currentTask.getPuzzle() instanceof ImageSelectPuzzle) {
+            puzzle = (ImageSelectPuzzle) currentTask.getPuzzle();
 
-        List<Integer> listOfItems = new ArrayList<>();
+            listOfItems = new ArrayList<>();
 
-  /*      for (Map.Entry<Integer, Boolean> entry : puzzle.getImages().entrySet) {
-            listOfItems.add(entry.getKey());
-        }
-*/
-        adapter = new ImageSelectListAdapter(this, R.layout.image_select_list_row, listOfItems);
-        listView.setAdapter(adapter);
-        // tvolgende is voor dienen toast
-        listView.setOnItemClickListener(adapter);
-        // KINDA A HACK? downloaden van opt internet
-        // listView.setListViewHeightBasedOnChildren(listView);
+            for (Map.Entry<Integer, Boolean> entry : puzzle.getImages().entrySet()) {
+                listOfItems.add(entry.getKey());
+            }
+
+            adapter = new ImageSelectListAdapter(this, R.layout.image_select_list_row, listOfItems);
+            gridView.setAdapter(adapter);
+            gridView.setOnItemClickListener(adapter);
+        } ;
+
     }
 
     public class ImageSelectListAdapter extends ArrayAdapter<Integer> implements AdapterView.OnItemClickListener {
@@ -91,7 +93,12 @@ public class ImageSelectPuzzleActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(getContext(),"message",Toast.LENGTH_LONG).show();
+            Integer image = listOfItems.get(position);
+            if (puzzle.getImages().get(image)) {
+                finish();
+            } else {
+                DialogUtils.createAlertDialog(ImageSelectPuzzleActivity.this, "Wrong picture!", "You chose a wrong picture");
+            }
         }
     }
 
@@ -100,9 +107,8 @@ public class ImageSelectPuzzleActivity extends AppCompatActivity {
         super.onResume();
         currentTask.getPuzzle();
 
-        question.setText(puzzle.getQuestion());
-
-        TimerUtil.startTimer(puzzle.getPuzzleTime(), counter, this, MyDemoStoryLineDBHelper.class);
+        questionView.setText(puzzle.getQuestion());
+        TimerUtil.startTimer(puzzle.getPuzzleTime(), timer, this, GardernTourStoryLineDBHelper.class);
 
     }
 }

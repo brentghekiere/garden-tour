@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;

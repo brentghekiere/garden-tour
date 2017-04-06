@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
+        storyLine = StoryLine.open(this, GardernTourStoryLineDBHelper.class);
 
         ButterKnife.bind(this);
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startGame(View view) {
 //        Intent i = new Intent(this, cz.mendelu.busItWeek.MapActivity.class);
-        Intent i = new Intent(this, cz.mendelu.busItWeek.SimplePuzzleActivity.class);
+        Intent i = new Intent(this, ImageSelectPuzzleActivity.class);
         startActivity(i);
     }
 }
