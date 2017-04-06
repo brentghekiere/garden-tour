@@ -5,6 +5,10 @@
     <string name="title_activity_map">Map</string>
     <string name="no_tasks"></string>
 
+    <!--MainActivity string-->
+    <string name="welcome_string">Welcome to the Arboretum Mendelu</string>
+    <string name="start_bttn">Start</string>
+
     <!-- MapActivity strings -->
     <string name="points">Activity Points</string>
 </resources>

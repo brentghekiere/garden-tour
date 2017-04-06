@@ -10,16 +10,16 @@
         android:id="@+id/taskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to the Arboretum Mendelu"
+        android:text="@string/welcome_string"
         tools:layout_editor_absoluteY="115dp"
         tools:layout_editor_absoluteX="79dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="Start"
-        android:text="Start"
-        android:textColor="White"
+        android:onClick="startGame"
+        android:text="@string/start_bttn"
+        android:textColor="@android:color/white"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="467dp" />
 </android.support.constraint.ConstraintLayout>
