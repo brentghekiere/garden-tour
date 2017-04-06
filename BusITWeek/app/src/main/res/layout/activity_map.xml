@@ -15,10 +15,11 @@
         tools:context="cz.mendelu.busItWeek.MapActivity"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/progress"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+/>
 
     <TextView
-        android:id="@+id/timer"
+        android:id="@+id/time_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/points"
@@ -63,12 +64,13 @@
         app:srcCompat="@drawable/icon_score" />
 
     <ImageView
-        android:id="@+id/timer_image"
+        android:id="@+id/timer"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        app:srcCompat="@drawable/stopwatch"
-        android:layout_alignBottom="@+id/timer"
-        android:layout_toStartOf="@+id/timer" />
+        android:scaleType="fitXY"
+        android:src="@drawable/stopwatch"
+        android:layout_alignTop="@+id/time_tv"
+        android:layout_toStartOf="@+id/time_tv" />
 
     <TextView
         android:id="@+id/points"

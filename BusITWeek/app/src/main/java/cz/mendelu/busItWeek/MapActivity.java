@@ -68,22 +68,19 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private BeaconUtil beaconUtil;
     private ImageButton readQRCodeButton;
 
-<<<<<<< HEAD
-    private ProgressBar progressBar;
-    private TextView points;
-    private TextView timer;
-=======
-    @BindView(R.id.progressBar4)
-    TextView menuBar;
-    private Integer currentPoints;
->>>>>>> 5391a6974a379927f442fe40a62d5e46ab03eb68
+    @BindView(R.id.points)
+    TextView points;
+    @BindView(R.id.time_tv)
+    TextView timer;
+
+    @BindView(R.id.progress)
+    ProgressBar progressBar;
 
     /**
      * Update the user's info in the top menubar of the application
      * @param points Integer The points the user currently has
      * @param progress Integer the amount of progress made in the storyline so far
      */
-<<<<<<< HEAD
     private void setUserInfo(Integer point, Integer progress) {
         String text = "";
         Integer currentPoints = 0;
@@ -95,12 +92,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         }catch(Exception e) {
             points.setText("ERROR: " + e.getMessage());
         }
-=======
-    private void setUserInfo(Integer points, Integer progress) {
-        String text = String.format("%1$s: %2$i",
-                        R.string.points, currentPoints);
-
->>>>>>> 5391a6974a379927f442fe40a62d5e46ab03eb68
     }
 
     @Override
@@ -112,17 +103,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-<<<<<<< HEAD
         // Get layout views
-        progressBar = (ProgressBar) findViewById(R.id.progress);
-        points = (TextView) findViewById(R.id.points);
-        timer = (TextView) findViewById(R.id.timer);
-=======
-        // Set the menubar values
-//        menuBar = (TextView) findViewById(R.id.user_info);
->>>>>>> 5391a6974a379927f442fe40a62d5e46ab03eb68
+//        progressBar = (ProgressBar) findViewById(R.id.progress);
+//        points = (TextView) findViewById(R.id.points);
+//        timer = (TextView) findViewById(R.id.time);
 
         // Set the menubar values
+        ButterKnife.bind(this);
         setUserInfo(0, 40);
 
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
@@ -143,8 +130,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         beaconUtil = new BeaconUtil(this);
 
         readQRCodeButton = (ImageButton) findViewById(R.id.read_qr_btn);
-
-        ButterKnife.bind(this);
     }
 
     private void initializeTasks() {

@@ -4,43 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cz.mendelu.busItWeek.be.tisvotetesten.deeszijndeoudste.SimplePuzzleActivity">
+    tools:context="cz.mendelu.busItWeek.SimplePuzzleActivity">
 
-    <RelativeLayout
-        android:layout_width="381dp"
-        android:layout_height="571dp"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="-2dp">
 
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="551dp"
+        android:orientation="horizontal">
         <TextView
-            android:id="@+id/questionTextView"
+            android:id="@+id/questionlbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="84dp"
-            android:text="TextView" />
+            android:text="This is a temp string"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/question"
+            android:text="this also temporary hihi, make it longer so multiple lines? "/>
 
         <EditText
-            android:id="@+id/answerEditText"
+            android:id="@+id/answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/questionTextView"
-            android:layout_below="@+id/questionTextView"
-            android:layout_marginTop="34dp"
+            android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/answerEditText"
-            android:layout_below="@+id/answerEditText"
-            android:layout_marginTop="55dp"
-            android:onClick="checkAnswer"
-            android:text="Button" />
-    </RelativeLayout>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
