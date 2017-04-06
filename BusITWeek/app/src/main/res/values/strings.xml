@@ -18,6 +18,7 @@
     <string name="choose_one_option_hint">Choose one option</string>
     <!--SimplePuzzleActivity-->
     <string name="answer_btn">Answer</string>
+    <string name="title_activity_end">End</string>
 
 </resources>
 

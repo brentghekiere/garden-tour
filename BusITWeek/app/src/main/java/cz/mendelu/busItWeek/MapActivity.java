@@ -82,18 +82,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     /**
      * Update the user's info in the top menubar of the application
-     * @param points Integer The points the user currently has
+     *
+     * @param points   Integer The points the user currently has
      * @param progress Integer the amount of progress made in the storyline so far
      */
     private void setUserInfo(Integer point, Integer progress) {
         String text = "";
         Integer currentPoints = 0;
 
-        try{
-            points.setText("30");
+        try {
+         //   points.setText(MainActivity.score);
             progressBar.setProgress(progress);
             timer.setText("30:00"); // TODO: implement timer
-        }catch(Exception e) {
+        } catch (Exception e) {
             points.setText("ERROR: " + e.getMessage());
         }
     }
@@ -245,14 +246,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onResume();
 
         currentTask = storyLine.currentTask();
-        if (currentTask == null) {
-            // game finished, no more task
 
+        if (currentTask == null) {
+            Intent i = new Intent(this, cz.mendelu.busItWeek.End.class);
+            startActivity(i);
         } else {
             // not finished, still some tasks left
             initializeListeners();
+         //   points.setText(MainActivity.score);
         }
-
         updateMarkers();
     }
 

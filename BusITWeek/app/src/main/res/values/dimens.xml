@@ -9,5 +9,6 @@
     <dimen name="text_btn_size">20dp</dimen>
     <dimen name="btn_height">60dp</dimen>
     <dimen name="btn_bottom_margin">50dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

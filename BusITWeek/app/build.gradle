@@ -33,7 +33,11 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.jakewharton:butterknife:8.5.1'
+<<<<<<< HEAD
     compile 'com.weiwangcn.betterspinner:library-material:1.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+=======
+>>>>>>> a5af7cd7e367e1a497c43ac10fddc0f7c4dc8c9d
     testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }
