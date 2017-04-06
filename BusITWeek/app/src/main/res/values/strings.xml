@@ -4,4 +4,7 @@
     <string name="second_number">Second Number</string>
     <string name="title_activity_map">Map</string>
     <string name="no_tasks"></string>
+
+    <!-- MapActivity strings -->
+    <string name="points">Activity Points</string>
 </resources>
