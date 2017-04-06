@@ -12,7 +12,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -66,7 +66,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private ImageButton readQRCodeButton;
 
     @BindView(R.id.progressBar4)
-    TextView menuBar;
+    ProgressBar menuBar;
     private Integer currentPoints;
 
     /**
@@ -88,9 +88,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        // Set the menubar values
-//        menuBar = (TextView) findViewById(R.id.user_info);
 
 
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
@@ -121,7 +118,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
             // GPS Task
             if (task instanceof GPSTask) {
-                newMarker = MapUtil.createColoredCircleMarker(
+                newMarker = MapUtil.createColoredMarker(
                         this,
                         mMap,
                         task.getName(),
@@ -133,11 +130,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
             // BEACON Task
             if (task instanceof BeaconTask) {
-                newMarker = MapUtil.createColoredCircleMarker(
+                newMarker = MapUtil.createColoredMarker(
                         this,
                         mMap,
                         task.getName(),
-                        R.color.colorGPS,
+                        R.color.colorBeacon,
                         R.style.marker_text_style,
                         new LatLng(task.getLatitude(), task.getLongitude())
                 );
@@ -155,7 +152,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
             // CODE Task
             if (task instanceof CodeTask) {
-                newMarker = MapUtil.createColoredCircleMarker(
+                newMarker = MapUtil.createColoredMarker(
                         this,
                         mMap,
                         task.getName(),
@@ -165,7 +162,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 );
 
             }
-            // newMarker.setVisible(false);
+
             mapOfMarkers.put(task, newMarker);
 
         }
@@ -214,9 +211,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     }
 
     private void cancelListeners() {
-        LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
-        if (beaconUtil.isRanging()) {
-            beaconUtil.stopRanging();
+        if (googleApiClient.isConnected()) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
+            if (beaconUtil.isRanging()) {
+                beaconUtil.stopRanging();
+            }
         }
         readQRCodeButton.setVisibility(View.GONE);
     }

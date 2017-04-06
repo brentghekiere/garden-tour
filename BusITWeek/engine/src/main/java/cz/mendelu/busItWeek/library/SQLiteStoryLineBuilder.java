@@ -152,6 +152,11 @@ class SQLiteStoryLineBuilder implements StoryLineBuilder {
             return (P) this;
         }
 
+        public P level(String level) {
+            contentValues.put(Puzzle.LEVEL, level);
+            return (P) this;
+        }
+
         @Override
         public T puzzleDone() {
             puzzleId = sqLiteDatabase.insertOrThrow(Puzzle.TABLE, null, contentValues);

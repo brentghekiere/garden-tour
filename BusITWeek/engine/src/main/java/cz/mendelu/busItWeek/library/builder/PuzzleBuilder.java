@@ -8,7 +8,11 @@ public interface PuzzleBuilder<P, T> {
 
     P puzzleTime(long time);
 
+    P level(String level);
+
     P hint(String hint);
 
     T puzzleDone();
+
+
 }

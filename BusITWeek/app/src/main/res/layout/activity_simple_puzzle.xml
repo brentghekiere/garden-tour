@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cz.mendelu.busItWeek.be.tisvotetesten.deeszijndeoudste.SimplePuzzleActivity">
+    tools:context="cz.mendelu.busItWeek.SimplePuzzleActivity">
 
     <RelativeLayout
         android:layout_width="381dp"
@@ -13,7 +13,7 @@
         tools:layout_editor_absoluteY="-2dp">
 
         <TextView
-            android:id="@+id/questionTextView"
+            android:id="@+id/question_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -23,24 +23,23 @@
             android:text="TextView" />
 
         <EditText
-            android:id="@+id/answerEditText"
+            android:id="@+id/answer_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/questionTextView"
-            android:layout_below="@+id/questionTextView"
+            android:layout_alignStart="@+id/question_tv"
+            android:layout_below="@+id/question_tv"
             android:layout_marginTop="34dp"
             android:ems="10"
-            android:inputType="textPersonName"
             android:text="Name" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/answer_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/answerEditText"
-            android:layout_below="@+id/answerEditText"
+            android:layout_alignStart="@+id/answer_tv"
+            android:layout_below="@+id/answer_tv"
             android:layout_marginTop="55dp"
             android:onClick="checkAnswer"
-            android:text="Button" />
+            android:text="@string/answer_btn" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

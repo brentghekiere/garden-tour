@@ -9,5 +9,6 @@
     <color name="colorQR">#333333</color>
 
     <color name="splash_name_color">#525151</color>
+    <color name="start_btn_color">#8b3a7b</color>
 
 </resources>

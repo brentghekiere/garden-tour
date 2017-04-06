@@ -7,24 +7,6 @@
     android:background="@drawable/start_background"
     tools:context="cz.mendelu.busItWeek.MainActivity">
 
-<<<<<<< HEAD
-    <TextView
-        android:id="@+id/taskName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome_string"
-        tools:layout_editor_absoluteY="115dp"
-        tools:layout_editor_absoluteX="79dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="startGame"
-        android:text="@string/start_bttn"
-        android:textColor="@android:color/white"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="467dp" />
-=======
     <LinearLayout
         android:layout_width="368dp"
         android:layout_height="551dp">
@@ -60,14 +42,13 @@
                 android:layout_height="67dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:backgroundTint="#8b3a7b"
-                android:onClick="start"
-                android:text="Start"
-                android:textColor="#FFF"
+                android:backgroundTint="@color/start_btn_color"
+                android:onClick="startGame"
+                android:text="@string/start_btn"
+                android:textColor="@android:color/white"
                 android:textSize="25dp" />
 
         </RelativeLayout>
     </LinearLayout>
 
->>>>>>> dce585010eba745d3d5e3eb1c9d3f97af6201afb
 </android.support.constraint.ConstraintLayout>

@@ -7,8 +7,12 @@
 
     <!--MainActivity string-->
     <string name="welcome_string">Welcome to the Arboretum Mendelu</string>
-    <string name="start_bttn">Start</string>
+    <string name="start_btn">Start</string>
 
     <!-- MapActivity strings -->
     <string name="points">Activity Points</string>
+
+    <!--SimplePuzzleActivity-->
+    <string name="answer_btn">Answer</string>
 </resources>
+

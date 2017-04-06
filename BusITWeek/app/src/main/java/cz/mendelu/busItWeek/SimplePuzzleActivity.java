@@ -7,7 +7,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-import cz.mendelu.busItWeek.R;
 import cz.mendelu.busItWeek.library.SimplePuzzle;
 import cz.mendelu.busItWeek.library.Task;
 
@@ -27,10 +26,10 @@ public class SimplePuzzleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple_puzzle2);
+        setContentView(R.layout.activity_simple_puzzle);
         // 1. Get widgets references
-        answerTextView = (EditText) findViewById(R.id.answerEditText);
-        questionView = (TextView) findViewById(R.id.questionTextView);
+        answerTextView = (EditText) findViewById(R.id.answer_tv);
+        questionView = (TextView) findViewById(R.id.question_tv);
         // 2. Open storyline
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
     }
