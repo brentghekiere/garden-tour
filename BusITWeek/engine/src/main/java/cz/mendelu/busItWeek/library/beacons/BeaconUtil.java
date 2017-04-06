@@ -35,7 +35,6 @@ public class BeaconUtil {
 
     /**
      * Initialization of the beacon utility
-     *
      * @param activity the context of the calling activity
      */
     public BeaconUtil(Activity activity) {
@@ -49,14 +48,15 @@ public class BeaconUtil {
     /**
      * Starts the ranging for the beacons.
      */
-    public void startRanging() {
+    public void startRanging(){
+
         // checks default permissions
         SystemRequirementsChecker.checkWithDefaultDialogs(activity);
         // connects to the service
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
-                Log.i(TAG, "Beacon service connected and ready");
+                Log.i(TAG, "Beacon service connected and ready" );
                 beaconManager.startRanging(region);
             }
         });
@@ -66,16 +66,13 @@ public class BeaconUtil {
             @Override
             public void onBeaconsDiscovered(Region region, List<Beacon> list) {
                 // beacon discovered
-                Log.i(TAG, "ranging");
+
                 if (!list.isEmpty()) {
-                    Log.i(TAG, "found beacons " + list.size());
-                    for (Beacon beacon : list) {
-                        Log.i(TAG, "Beacon Major: " + beacon.getMajor() + " Minor: " + beacon.getMinor());
-                        for (BeaconDefinition beaconDef : listOfBeacons) {
+                    for (Beacon beacon: list) {
+                        for (BeaconDefinition beaconDef: listOfBeacons) {
                             if (beacon.getMajor() == beaconDef.getMajorNumber() && beacon.getMinor()
-                                    == beaconDef.getMinorNumber() && !beaconDef.codeExecuted) {
+                                    == beaconDef.getMinorNumber() && !beaconDef.codeExecuted){
                                 beaconDef.execute();
-                                Log.i(TAG, "executed");
                                 beaconDef.codeExecuted = true;
                             }
                         }
@@ -86,14 +83,14 @@ public class BeaconUtil {
         ranging = true;
     }
 
-    public void clearBeacons() {
+    public void clearBeacons(){
         listOfBeacons.clear();
     }
 
     /**
      * Stops the ranging for the beacons.
      */
-    public void stopRanging() {
+    public void stopRanging(){
         if (beaconManager != null) {
             beaconManager.stopRanging(region);
         }
@@ -102,12 +99,11 @@ public class BeaconUtil {
 
     /**
      * Adds new beacon to the list of beacons.
-     *
      * @param beacon the beacon to be ranged
      * @throws IllegalArgumentException throws if beacon is null
      */
-    public void addBeacon(BeaconDefinition beacon) throws IllegalArgumentException {
-        if (beacon == null) {
+    public void addBeacon(BeaconDefinition beacon) throws IllegalArgumentException{
+        if (beacon == null){
             throw new IllegalArgumentException("New beacon cannot be null.");
         }
 

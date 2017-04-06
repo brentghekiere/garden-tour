@@ -5,6 +5,10 @@ import android.util.Log;
 
 import static java.lang.String.format;
 
+/**
+ * Created by Honza on 07.03.2017.
+ */
+
 public class SimplePuzzle extends Puzzle {
 
     private static final String TAG = SimplePuzzle.class.getSimpleName();
