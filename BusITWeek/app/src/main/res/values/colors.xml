@@ -8,4 +8,6 @@
     <color name="colorBeacon">#0074aa</color>
     <color name="colorQR">#333333</color>
 
+    <color name="splash_name_color">#525151</color>
+
 </resources>
