@@ -4,20 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cz.mendelu.busItWeek.SimplePuzzleActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme"
+        android:minHeight="?android:actionBarSize"
+        android:background="@color/colorPrimary" />
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="551dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/question_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is a temp string" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/question"
-            android:text="this also temporary hihi, make it longer so multiple lines? "/>
+            android:layout_gravity="center"
+            android:text="This is a temp string"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/input_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_answer"
+                android:inputType="text"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
 
         <EditText
             android:id="@+id/answer_tv"

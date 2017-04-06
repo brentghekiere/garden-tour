@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startGame(View view) {
-        Intent i = new Intent(this, cz.mendelu.busItWeek.MapActivity.class);
+//        Intent i = new Intent(this, cz.mendelu.busItWeek.MapActivity.class);
+        Intent i = new Intent(this, cz.mendelu.busItWeek.SimplePuzzleActivity.class);
         startActivity(i);
     }
 }
