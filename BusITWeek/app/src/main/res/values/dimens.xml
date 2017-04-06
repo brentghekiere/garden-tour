@@ -5,5 +5,6 @@
     <dimen name="logo_mendulu_size">340dp</dimen>
     <dimen name="splash_name_size">40dp</dimen>
     <dimen name="splash_margin">80dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

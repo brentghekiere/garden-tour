@@ -16,6 +16,7 @@
     <string name="wrongAnswer">Answer incorrected, try again</string>
     <!--SimplePuzzleActivity-->
     <string name="answer_btn">Answer</string>
+    <string name="title_activity_end">End</string>
 
 </resources>
 

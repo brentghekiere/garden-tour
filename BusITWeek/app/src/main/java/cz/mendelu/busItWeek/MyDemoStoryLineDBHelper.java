@@ -8,12 +8,12 @@ import static cz.mendelu.busItWeek.library.Puzzle.PuzzleLevel.EASY;
 
 public class MyDemoStoryLineDBHelper extends StoryLineDatabaseHelper {
     public MyDemoStoryLineDBHelper() {
-        super(14);
+        super(19);
     }
 
     @Override
     protected void onCreate(StoryLineBuilder builder) {
-        builder.addGPSTask("second one")
+        builder.addGPSTask("first one")
                 .victoryPoints(15)
                 .location(49.209723, 16.614485)
                 .radius(80000)
@@ -23,18 +23,19 @@ public class MyDemoStoryLineDBHelper extends StoryLineDatabaseHelper {
                 .answer("1")
                 .puzzleDone()
                 .taskDone();
-/*
+
+
         builder.addBeaconTask("beacon")
-                .beacon(1, 9)
+                .beacon(1, 19)
                 .victoryPoints(15)
-                .location(49.209611, 16.614091)
+                .location(500, 16.614091)
                 .simplePuzzle()
-                .question("What is the meaning of life?")
-                .answer("BusIT Week")
+                .question("What is the meaning of fear?")
+                .answer("1")
                 .puzzleTime(454354354)
                 .puzzleDone().taskDone();
 
-        /*
+/*
       builder.addCodeTask("Code")
               .location(49.209611, 16.614091)
               .victoryPoints(13)
