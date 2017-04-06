@@ -1,0 +1,3 @@
+82C55B green
+525151 gray
+8B3A7B purple

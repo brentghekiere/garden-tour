@@ -6,5 +6,5 @@
     <string name="no_tasks"></string>
 
     <!-- MapActivity strings -->
-    <string name="points">Activity Points</string>
+    <string name="points" formatted="false">Activity Points: %d</string>
 </resources>
