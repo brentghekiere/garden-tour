@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void showPuzzle(View view) {
+    public void start(View view) {
         Intent i = new Intent(this, cz.mendelu.busItWeek.MapActivity.class);
         startActivity(i);
     }
