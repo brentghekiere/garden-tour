@@ -3,15 +3,14 @@ package cz.mendelu.busItWeek;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -51,7 +50,7 @@ import cz.mendelu.busItWeek.library.map.MapUtil;
 import cz.mendelu.busItWeek.library.qrcode.QRCodeUtil;
 
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, GoogleMap.OnMarkerClickListener {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, GoogleMap.OnMarkerClickListener {
 
     private static final int SIMPLE_PUZZLE_REQUEST_CODE = 1;
     private static final int IMAGE_PUZZLE_REQUEST_CODE = 2;
@@ -71,11 +70,14 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private Integer currentPoints;
     @BindView(R.id.points)
     TextView points;
-    @BindView(R.id.time_tv)
+    @BindView(R.id.timer)
     TextView timer;
 
     @BindView(R.id.progress)
     ProgressBar progressBar;
+
+    @BindView(R.id.main_toolbar)
+    Toolbar toolbar;
 
     /**
      * Update the user's info in the top menubar of the application
@@ -105,13 +107,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // Get layout views
-//        progressBar = (ProgressBar) findViewById(R.id.progress);
-//        points = (TextView) findViewById(R.id.points);
-//        timer = (TextView) findViewById(R.id.time);
-
         // Set the menubar values
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         setUserInfo(0, 40);
 
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
