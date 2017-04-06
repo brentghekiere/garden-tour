@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="april_flowers">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/resources/fonts/april_flowers.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
