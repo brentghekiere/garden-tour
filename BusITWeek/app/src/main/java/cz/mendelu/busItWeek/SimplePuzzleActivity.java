@@ -8,7 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-import cz.mendelu.busItWeek.R;
+import com.estimote.sdk.repackaged.retrofit_v1_9_0.retrofit.http.HEAD;
+
 import cz.mendelu.busItWeek.library.SimplePuzzle;
 import cz.mendelu.busItWeek.library.Task;
 
@@ -29,11 +30,10 @@ public class SimplePuzzleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple_puzzle2);
+        setContentView(R.layout.activity_simple_puzzle);
         // 1. Get widgets references
-        answerTextView = (EditText) findViewById(R.id.answer);
+        answerTextView = (EditText) findViewById(R.id.answer_tv);
         questionView = (TextView) findViewById(R.id.question);
-        timerView = (TextView) findViewById(R.id.puzzleTimer);
 
         // 2. Open storyline
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);

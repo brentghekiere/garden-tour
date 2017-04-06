@@ -80,6 +80,7 @@ class StoryLineOpenHelper extends SQLiteOpenHelper implements TaskDatabase {
                 Puzzle.TYPE + " INTEGER NOT NULL, " +
                 Puzzle.HINT + " TEXT, " +
                 Puzzle.PUZZLE_TIME + " INTEGER, " +
+                Puzzle.LEVEL + " TEXT, " +
                 AssignmentPuzzle.ASSIGNMENT + " TEXT, " +
                 AssignmentPuzzle.BEACON_MAJOR_CODE + " INTEGER, " +
                 AssignmentPuzzle.BEACON_MINOR_CODE + " INTEGER, " +

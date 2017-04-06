@@ -30,12 +30,12 @@ public class MapUtil {
      * @param location location of the marker
      * @return googla map Marker
      */
-    public static Marker createColoredCircleMarker(Context context,
-                                                   GoogleMap map,
-                                                   String text,
-                                                   int backgroundColor,
-                                                   int textStyle,
-                                                   LatLng location){
+    public static Marker createColoredMarker(Context context,
+                                             GoogleMap map,
+                                             String text,
+                                             int backgroundColor,
+                                             int textStyle,
+                                             LatLng location){
 
         IconGenerator mClusterIconGenerator = new IconGenerator(context);
         final Drawable clusterIcon = context.getResources().getDrawable(R.drawable.marker_circle_background);

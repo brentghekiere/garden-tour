@@ -7,29 +7,21 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import cz.mendelu.busItWeek.library.StoryLine;
-import cz.mendelu.busItWeek.library.Task;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_PERMISSION = 100;
     private StoryLine storyLine;
-
-    @BindView(R.id.taskName)
-    TextView taskName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
 
-        taskName = (TextView) findViewById(R.id.taskName);
         ButterKnife.bind(this);
 
         boolean hasPermission =
@@ -51,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Task task = storyLine.currentTask();
-        if (task == null) {
-            taskName.setText(getString(R.string.no_tasks));
-        } else {
-            taskName.setText(task.getName());
-        }
+//        Task task = storyLine.currentTask();
+//        if (task == null) {
+//            taskName.setText(getString(R.string.no_tasks));
+//        } else {
+//            taskName.setText(task.getName());
+//        }
     }
 
     public void startGame(View view) {

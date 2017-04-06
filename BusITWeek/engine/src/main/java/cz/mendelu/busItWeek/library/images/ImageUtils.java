@@ -48,4 +48,8 @@ public class ImageUtils {
 
         return inSampleSize;
     }
+
+//    public static int[] initMemoryCars() {
+//
+//    }
 }
