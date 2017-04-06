@@ -18,9 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int REQUEST_PERMISSION = 100;
-    private EditText firstNumber;
-    private EditText secondNumber;
-    private TextView resultView;
     private StoryLine storyLine;
     private TextView taskName;
 
@@ -48,14 +45,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void addTwoNumbers(View view) {
-        Log.d(TAG, "call method addTwoNumbers");
-        double a = Double.parseDouble(firstNumber.getText().toString());
-        double b = Double.parseDouble(secondNumber.getText().toString());
-        resultView.setText(Double.toString(a + b));
-    }
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -67,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void showPuzzle(View view) {
+    public void start(View view) {
         Intent i = new Intent(this, cz.mendelu.busItWeek.MapActivity.class);
         startActivity(i);
     }

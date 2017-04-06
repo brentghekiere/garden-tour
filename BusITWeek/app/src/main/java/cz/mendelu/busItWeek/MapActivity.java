@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -62,8 +63,22 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private HashMap<Task, Marker> mapOfMarkers;
 
     private BeaconUtil beaconUtil;
-
     private ImageButton readQRCodeButton;
+
+    private TextView menuBar;
+    private Integer currentPoints;
+
+    /**
+     * Update the user's info in the top menubar of the application
+     * @param points Integer The points the user currently has
+     * @param progress Integer the amount of progress made in the storyline so far
+     */
+    private void setUserInfo(Integer points, Integer progress) {
+        menuBar = (TextView) findViewById(R.id.user_info);
+        String text = String.format("%1$s: %2$i",
+                        R.string.points, currentPoints);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +88,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Set the menubar values
+        menuBar = (TextView) findViewById(R.id.user_info);
+
 
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
 
