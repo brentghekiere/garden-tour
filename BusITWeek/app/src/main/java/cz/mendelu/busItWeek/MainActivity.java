@@ -6,20 +6,22 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cz.mendelu.busItWeek.library.StoryLine;
 import cz.mendelu.busItWeek.library.Task;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_PERMISSION = 100;
     private StoryLine storyLine;
-    private TextView taskName;
+
+    @BindView(R.id.taskName)
+    TextView taskName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
 
         taskName = (TextView) findViewById(R.id.taskName);
+        ButterKnife.bind(this);
 
         boolean hasPermission =
                 (ContextCompat.checkSelfPermission(this,
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void start(View view) {
+    public void startGame(View view) {
         Intent i = new Intent(this, cz.mendelu.busItWeek.MapActivity.class);
         startActivity(i);
     }
