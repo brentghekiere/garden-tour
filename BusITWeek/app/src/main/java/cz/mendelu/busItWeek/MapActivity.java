@@ -4,11 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageButton;
@@ -27,12 +27,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.SphericalUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cz.mendelu.busItWeek.library.BeaconTask;
 import cz.mendelu.busItWeek.library.CodeTask;
 import cz.mendelu.busItWeek.library.GPSTask;
@@ -41,7 +42,6 @@ import cz.mendelu.busItWeek.library.Puzzle;
 import cz.mendelu.busItWeek.library.SimplePuzzle;
 import cz.mendelu.busItWeek.library.StoryLine;
 import cz.mendelu.busItWeek.library.Task;
-import cz.mendelu.busItWeek.library.TaskStatus;
 import cz.mendelu.busItWeek.library.beacons.BeaconDefinition;
 import cz.mendelu.busItWeek.library.beacons.BeaconUtil;
 import cz.mendelu.busItWeek.library.map.MapUtil;
@@ -65,7 +65,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private BeaconUtil beaconUtil;
     private ImageButton readQRCodeButton;
 
-    private TextView menuBar;
+    @BindView(R.id.progressBar4)
+    TextView menuBar;
     private Integer currentPoints;
 
     /**
@@ -74,7 +75,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
      * @param progress Integer the amount of progress made in the storyline so far
      */
     private void setUserInfo(Integer points, Integer progress) {
-        menuBar = (TextView) findViewById(R.id.user_info);
         String text = String.format("%1$s: %2$i",
                         R.string.points, currentPoints);
 
@@ -90,7 +90,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         mapFragment.getMapAsync(this);
 
         // Set the menubar values
-        menuBar = (TextView) findViewById(R.id.user_info);
+//        menuBar = (TextView) findViewById(R.id.user_info);
 
 
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
@@ -111,6 +111,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         beaconUtil = new BeaconUtil(this);
 
         readQRCodeButton = (ImageButton) findViewById(R.id.read_qr_btn);
+
+        ButterKnife.bind(this);
     }
 
     private void initializeTasks() {
