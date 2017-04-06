@@ -42,13 +42,23 @@
                 android:layout_height="67dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+<<<<<<< HEAD
                 android:backgroundTint="@color/start_btn_color"
                 android:onClick="startGame"
                 android:text="@string/start_btn"
                 android:textColor="@android:color/white"
+=======
+                android:backgroundTint="#8b3a7b"
+                android:onClick="startGame"
+                android:text="Start"
+                android:textColor="#FFF"
+>>>>>>> 6b5dabd227a7e48a53cac7c4d4abdfb5adc073f4
                 android:textSize="25dp" />
 
         </RelativeLayout>
     </LinearLayout>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6b5dabd227a7e48a53cac7c4d4abdfb5adc073f4
 </android.support.constraint.ConstraintLayout>

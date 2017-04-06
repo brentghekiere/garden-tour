@@ -28,8 +28,13 @@ public class SimplePuzzleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_puzzle);
         // 1. Get widgets references
+<<<<<<< HEAD
         answerTextView = (EditText) findViewById(R.id.answer_tv);
         questionView = (TextView) findViewById(R.id.question_tv);
+=======
+        answerTextView = (EditText) findViewById(R.id.answer);
+        questionView = (TextView) findViewById(R.id.question);
+>>>>>>> 6b5dabd227a7e48a53cac7c4d4abdfb5adc073f4
         // 2. Open storyline
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
     }

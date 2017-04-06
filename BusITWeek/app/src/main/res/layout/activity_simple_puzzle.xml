@@ -6,32 +6,45 @@
     android:layout_height="match_parent"
     tools:context="cz.mendelu.busItWeek.SimplePuzzleActivity">
 
-    <RelativeLayout
-        android:layout_width="381dp"
-        android:layout_height="571dp"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="-2dp">
 
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="551dp"
+        android:orientation="horizontal">
         <TextView
+<<<<<<< HEAD:BusITWeek/app/src/main/res/layout/activity_simple_puzzle.xml
             android:id="@+id/question_tv"
+=======
+            android:id="@+id/questionlbl"
+>>>>>>> 6b5dabd227a7e48a53cac7c4d4abdfb5adc073f4:BusITWeek/app/src/main/res/layout/activity_simple_puzzle2.xml
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="84dp"
-            android:text="TextView" />
+            android:text="This is a temp string"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/question"
+            android:text="this also temporary hihi, make it longer so multiple lines? "/>
 
         <EditText
+<<<<<<< HEAD:BusITWeek/app/src/main/res/layout/activity_simple_puzzle.xml
             android:id="@+id/answer_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/question_tv"
             android:layout_below="@+id/question_tv"
             android:layout_marginTop="34dp"
+=======
+            android:id="@+id/answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+>>>>>>> 6b5dabd227a7e48a53cac7c4d4abdfb5adc073f4:BusITWeek/app/src/main/res/layout/activity_simple_puzzle2.xml
             android:ems="10"
             android:text="Name" />
 
+<<<<<<< HEAD:BusITWeek/app/src/main/res/layout/activity_simple_puzzle.xml
         <Button
             android:id="@+id/answer_btn"
             android:layout_width="wrap_content"
@@ -42,4 +55,7 @@
             android:onClick="checkAnswer"
             android:text="@string/answer_btn" />
     </RelativeLayout>
+=======
+    </LinearLayout>
+>>>>>>> 6b5dabd227a7e48a53cac7c4d4abdfb5adc073f4:BusITWeek/app/src/main/res/layout/activity_simple_puzzle2.xml
 </android.support.constraint.ConstraintLayout>
