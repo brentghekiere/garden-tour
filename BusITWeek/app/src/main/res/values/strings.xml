@@ -10,13 +10,10 @@
     <string name="start_btn">Start</string>
 
     <!-- MapActivity strings -->
-<<<<<<< HEAD
-    <string name="points">Activity Points</string>
+    <string name="points" formatted="false">Activity Points: %d</string>
 
     <!--SimplePuzzleActivity-->
     <string name="answer_btn">Answer</string>
-=======
-    <string name="points" formatted="false">Activity Points: %d</string>
->>>>>>> 6b5dabd227a7e48a53cac7c4d4abdfb5adc073f4
+
 </resources>
 

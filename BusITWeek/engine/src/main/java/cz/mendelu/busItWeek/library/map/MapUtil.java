@@ -38,7 +38,7 @@ public class MapUtil {
                                              LatLng location){
 
         IconGenerator mClusterIconGenerator = new IconGenerator(context);
-        final Drawable clusterIcon = context.getResources().getDrawable(R.drawable.ic_place_medium_24dp);
+        final Drawable clusterIcon = context.getResources().getDrawable(R.drawable.marker_circle_background);
         clusterIcon.setColorFilter(context.getResources().getColor(backgroundColor), PorterDuff.Mode.SRC_ATOP);
 
         mClusterIconGenerator.setBackground(clusterIcon);

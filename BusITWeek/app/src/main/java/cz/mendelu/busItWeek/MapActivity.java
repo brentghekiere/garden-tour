@@ -15,11 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-<<<<<<< HEAD
-=======
 import android.widget.TextView;
->>>>>>> 6b5dabd227a7e48a53cac7c4d4abdfb5adc073f4
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -71,11 +67,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private BeaconUtil beaconUtil;
     private ImageButton readQRCodeButton;
 
-<<<<<<< HEAD
-    @BindView(R.id.progressBar4)
-    ProgressBar menuBar;
     private Integer currentPoints;
-=======
     @BindView(R.id.points)
     TextView points;
     @BindView(R.id.time_tv)
@@ -83,7 +75,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     @BindView(R.id.progress)
     ProgressBar progressBar;
->>>>>>> 6b5dabd227a7e48a53cac7c4d4abdfb5adc073f4
 
     /**
      * Update the user's info in the top menubar of the application
@@ -112,8 +103,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-<<<<<<< HEAD
-=======
         // Get layout views
 //        progressBar = (ProgressBar) findViewById(R.id.progress);
 //        points = (TextView) findViewById(R.id.points);
@@ -122,7 +111,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         // Set the menubar values
         ButterKnife.bind(this);
         setUserInfo(0, 40);
->>>>>>> 6b5dabd227a7e48a53cac7c4d4abdfb5adc073f4
 
         storyLine = StoryLine.open(this, MyDemoStoryLineDBHelper.class);
 
